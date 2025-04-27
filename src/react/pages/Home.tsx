@@ -1,17 +1,27 @@
 import { useState } from "react";
 
+const tokens = ["h1", "img"];
+
 function Home() {
-  const [count, setCount] = useState(0);
+  const [code, setCode] = useState([] as string[]);
+
+  const addCode = (token: string) => setCode([...code, token]);
 
   return (
     <>
       <h1>Home</h1>
       <p>Lorem Ipsum</p>
       <div>
-        <div>{count}</div>
-        <button type="button" onClick={() => setCount(count + 1)}>
-          Count
-        </button>
+        {code.map((token) => (
+          <p key={token}>{token}</p>
+        ))}
+      </div>
+      <div>
+        {tokens.map((token) => (
+          <button key={token} type="button" onClick={() => addCode(token)}>
+            {token}
+          </button>
+        ))}
       </div>
     </>
   );
