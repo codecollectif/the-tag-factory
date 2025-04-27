@@ -1,8 +1,16 @@
 import { useState } from "react";
 
 const tokens = [
-  { id: 1, left: "<h1", right: ">" },
-  { id: 2, left: "<img", right: "/>" },
+  { id: 1, left: "<h1", right: ">", accepts: "&#9633;" },
+  { id: 2, left: "<img", right: "/>", accepts: "&#9675;" },
+  { id: 3, left: ">", right: "</h1>", type: "&#9633;", accepts: null },
+  {
+    id: 4,
+    left: "src='kitty.webp'",
+    right: "/>",
+    type: "&#9675;",
+    accepts: null,
+  },
 ];
 
 type Token = (typeof tokens)[0];
@@ -12,6 +20,8 @@ function Home() {
 
   const addCode = (token: Token) => setCode([...code, token]);
 
+  const removeLastCode = () => setCode(code.slice(0, -1));
+
   return (
     <>
       <h1>Home</h1>
@@ -20,16 +30,25 @@ function Home() {
         {code.map((token, index, array) => (
           <div key={token.id}>
             <span>{token.left}</span>
-            {index === array.length - 1 && <span>{token.right}</span>}
+            {index === array.length - 1 && (
+              <>
+                <span>{token.right}</span>
+                <button type="button" onClick={removeLastCode}>
+                  x
+                </button>
+              </>
+            )}
           </div>
         ))}
       </div>
       <div>
-        {tokens.map((token) => (
-          <button key={token.id} type="button" onClick={() => addCode(token)}>
-            {token.left} {token.right}
-          </button>
-        ))}
+        {tokens
+          .filter((token) => token.type === code.at(-1)?.accepts)
+          .map((token) => (
+            <button key={token.id} type="button" onClick={() => addCode(token)}>
+              {token.left} {token.right}
+            </button>
+          ))}
       </div>
     </>
   );
