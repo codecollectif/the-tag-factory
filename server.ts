@@ -3,8 +3,6 @@ import express, { type ErrorRequestHandler, type Express } from "express";
 import { rateLimit } from "express-rate-limit";
 import { createServer as createViteServer } from "vite";
 
-import "./src/database/checkConnection";
-
 const port = 5173;
 
 createServer().then((server) => {

@@ -11,7 +11,6 @@
     "check": "biome check --error-on-warnings .",
     "check:fix": "biome check --write --error-on-warnings .",
     "check-types": "tsc --noEmit",
-    "database:sync": "tsx --env-file=.env bin/database-sync",
     "dev": "tsx --env-file=.env server",
     "start": "tsx --env-file=.env server",
     "test": "vitest run --coverage"
@@ -20,9 +19,7 @@
     "@biomejs/biome": "1.9.4",
     "@testing-library/react": "^16.3.0",
     "@types/compression": "^1.7.5",
-    "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.1",
-    "@types/jsonwebtoken": "^9.0.9",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@types/supertest": "^6.0.3",
@@ -36,16 +33,12 @@
     "vitest": "^3.1.2"
   },
   "dependencies": {
-    "argon2": "^0.43.0",
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
-    "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.5.2",
-    "zod": "^3.24.3"
+    "react-router": "^7.5.2"
   }
 }
