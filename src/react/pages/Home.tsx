@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 
 const tokens = [
@@ -16,6 +17,8 @@ const tokens = [
 type Token = (typeof tokens)[0];
 
 function Home() {
+  const [animationParent] = useAutoAnimate();
+
   const [code, setCode] = useState([] as Token[]);
 
   const addCode = (token: Token) => setCode([...code, token]);
@@ -41,7 +44,7 @@ function Home() {
           </div>
         ))}
       </div>
-      <div>
+      <div ref={animationParent}>
         {tokens
           .filter((token) => token.type === code.at(-1)?.accepts)
           .map((token) => (
