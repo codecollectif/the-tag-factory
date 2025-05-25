@@ -1,12 +1,12 @@
 import { act, render } from "@testing-library/react";
 import { BrowserRouter } from "react-router";
 
-import Home from "../../src/react/pages/Home";
+import ElementCreate from "../../src/react/pages/ElementCreate";
 
 describe("React Pages", () => {
-  test("<Home />", async () => {
+  test("<ElementCreate />", async () => {
     await act(async () => {
-      render(<Home />, { wrapper: BrowserRouter });
+      render(<ElementCreate />, { wrapper: BrowserRouter });
     });
 
     expect(true).toBeTruthy();

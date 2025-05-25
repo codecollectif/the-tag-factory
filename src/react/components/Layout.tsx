@@ -1,7 +1,13 @@
 import type { PropsWithChildren } from "react";
 
+import { AuthProvider } from "./AuthContext";
+
 function Layout({ children }: PropsWithChildren) {
-  return <main>{children}</main>;
+  return (
+    <AuthProvider>
+      <main>{children}</main>
+    </AuthProvider>
+  );
 }
 
 export default Layout;

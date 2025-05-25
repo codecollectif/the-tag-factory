@@ -1,1 +1,60 @@
 /* Look at index.html and give a try to Pico */
+
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 2rem;
+  place-items: center;
+  text-align: center;
+
+  li {
+    list-style-type: none;
+  }
+
+  li:nth-child(2n + 1) {
+    --translate: translateX(-1rem);
+  }
+  li:nth-child(3n + 1) {
+    --translate: translateY(1rem);
+  }
+  li:nth-child(3n + 2) {
+    --translate: translateX(1rem);
+  }
+
+  li:nth-child(2n) {
+    transform: rotate(-2deg) var(--translate);
+  }
+  li:nth-child(3n) {
+    transform: rotate(1deg) var(--translate);
+  }
+  li:nth-child(5n) {
+    transform: rotate(-3deg) var(--translate);
+  }
+  li:nth-child(7n) {
+    transform: rotate(6deg) var(--translate);
+  }
+  li:nth-child(11n) {
+    transform: rotate(4deg) var(--translate);
+  }
+
+  figure {
+    padding: 1rem;
+
+    &:has(p) {
+      box-shadow: 0px 2px 4px black;
+      background-color: pink;
+
+      p {
+        width: 200px;
+        height: 200px;
+        margin: 0;
+      }
+    }
+    &:has(img) {
+      box-shadow: 0px 1px 3px grey;
+
+      img {
+        border: 1px solid grey;
+      }
+    }
+  }
+}
