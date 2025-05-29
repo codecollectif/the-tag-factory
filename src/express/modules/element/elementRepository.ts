@@ -29,7 +29,7 @@ class ElementRepository {
 
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
-      "select * from element where deleted_at is null",
+      "select * from element where deleted_at is null order by created_at desc",
     );
 
     return rows as MyElement[];

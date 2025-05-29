@@ -1,6 +1,8 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useState } from "react";
 
+import { useElements } from "../components/ElementContext";
+
 const tokens = [
   { id: 1, left: "<p>", right: "", accepts: "&#9633;" },
   { id: 2, left: "<img", right: "/>", accepts: "&#9675;" },
@@ -69,9 +71,16 @@ const tokens = [
   },
 ];
 
+const pickRandomColor = () =>
+  ["pink", "lemonchiffon", "hsl(180,100%,90%)"].at(
+    Math.floor(Math.random() * 3),
+  );
+
 type Token = (typeof tokens)[0];
 
 function Home() {
+  const { addElement } = useElements();
+
   const [animationParent] = useAutoAnimate();
 
   const [code, setCode] = useState([] as Token[]);
@@ -81,6 +90,22 @@ function Home() {
   const removeLastCode = () => setCode(code.slice(0, -1));
 
   const postCode = () => {
+    const textContent =
+      code.reduce((acc, token) => `${acc}${token.left} `, "") +
+      code.at(-1)?.right;
+
+    const text = textContent.startsWith("<p>")
+      ? `<figure style='background-color: ${pickRandomColor()}'>${textContent}</figure>`
+      : `<figure>${textContent
+          .replace("kitty.webp", "https://cataas.com/cat?width=200&height=200")
+          .replace("dog.webp", "https://placedog.net/200/200?random")
+          .replace(
+            "surprise.webp",
+            "https://picsum.photos/200",
+          )}<figcaption>${textContent.match(/(?:alt)=(')(.*?)\1/)?.at(2)}</figcaption></figure>`;
+
+    addElement({ text });
+
     setCode([]);
   };
 
