@@ -1,8 +1,8 @@
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useEffect, useState } from "react";
 
-import AuthForm from "../components/AuthForm";
-import BurgerMenu from "../components/BurgerMenu";
+import QRCode from "../assets/images/qrcode.png";
+
 import { useElements } from "../components/ElementContext";
 
 function ItemList() {
@@ -28,13 +28,14 @@ function ItemList() {
 
   return (
     <>
-      <header>
-        <BurgerMenu>
-          <AuthForm />
-        </BurgerMenu>
-      </header>
       <h1>La Fabrique à Balises</h1>
       <ul ref={animationParent} className="grid">
+        <li>
+          <figure>
+            <img src={QRCode} alt="factory.codecollectif.fr" width="200" />
+            <figcaption>⮉ scan me ⮉</figcaption>
+          </figure>
+        </li>
         {allElements.map((element) => (
           <li
             key={element.id}

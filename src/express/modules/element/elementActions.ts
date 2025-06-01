@@ -19,6 +19,8 @@ const subscribe: RequestHandler = async (req, res) => {
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
+  res.write("hello, world!");
+
   clients.push(res);
 
   req.on("close", () => {

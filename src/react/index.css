@@ -1,5 +1,9 @@
 /* Look at index.html and give a try to Pico */
 
+#root > :is(footer, header, main) {
+  padding-block: var(--pico-block-spacing-vertical);
+}
+
 .grid {
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 2rem;

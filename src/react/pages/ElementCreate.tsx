@@ -97,11 +97,17 @@ function Home() {
     const text = textContent.startsWith("<p>")
       ? `<figure style='background-color: ${pickRandomColor()}'>${textContent}</figure>`
       : `<figure>${textContent
-          .replace("kitty.webp", "https://cataas.com/cat?width=200&height=200")
-          .replace("dog.webp", "https://placedog.net/200/200?random")
+          .replace(
+            "kitty.webp",
+            `https://cataas.com/cat?width=200&height=200&random=${Date.now()}`,
+          )
+          .replace(
+            "dog.webp",
+            `https://placedog.net/200/200?random=${Date.now()}`,
+          )
           .replace(
             "surprise.webp",
-            "https://picsum.photos/200",
+            `https://picsum.photos/200?random=${Date.now()}`,
           )}<figcaption>${textContent.match(/(?:alt)=(')(.*?)\1/)?.at(2)}</figcaption></figure>`;
 
     addElement({ text });
