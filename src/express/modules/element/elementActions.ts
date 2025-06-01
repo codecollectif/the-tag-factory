@@ -2,7 +2,7 @@ import type { RequestHandler, Response } from "express";
 
 import elementRepository from "./elementRepository";
 
-const clients = [] as Response[];
+const subscribers = [] as Response[];
 
 /* ************************************************************************ */
 
@@ -19,14 +19,14 @@ const subscribe: RequestHandler = async (req, res) => {
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
-  res.write("hello, world!");
+  res.write("data: hello, world!\n\n");
 
-  clients.push(res);
+  subscribers.push(res);
 
   req.on("close", () => {
     res.end();
 
-    clients.splice(clients.indexOf(res), 1);
+    subscribers.splice(subscribers.indexOf(res), 1);
   });
 };
 
@@ -35,9 +35,11 @@ const subscribe: RequestHandler = async (req, res) => {
 const add: RequestHandler = async (req, res) => {
   const insertId = await elementRepository.create(req.body);
 
-  for (const client of clients) {
-    client.write("event: newElement\n");
-    client.write(`data: ${JSON.stringify({ ...req.body, id: insertId })}\n\n`);
+  for (const subscriber of subscribers) {
+    subscriber.write("event: newElement\n");
+    subscriber.write(
+      `data: ${JSON.stringify({ ...req.body, id: insertId })}\n\n`,
+    );
   }
 
   res.status(201).json({ insertId });

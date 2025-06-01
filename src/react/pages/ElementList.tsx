@@ -16,7 +16,7 @@ function ItemList() {
     const eventSource = new EventSource("/api/elements/events");
 
     const onNewElement = (event: MessageEvent) => {
-      setAllElements([JSON.parse(event.data), ...allElements]);
+      setAllElements((previous) => [JSON.parse(event.data), ...previous]);
     };
 
     eventSource.addEventListener("newElement", onNewElement);
@@ -24,7 +24,7 @@ function ItemList() {
     return () => {
       eventSource.removeEventListener("newElement", onNewElement);
     };
-  }, [allElements]);
+  }, []);
 
   return (
     <>
